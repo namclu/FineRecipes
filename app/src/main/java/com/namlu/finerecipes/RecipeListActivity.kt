@@ -17,7 +17,6 @@ class RecipeListActivity : BaseActivity() {
                 showProgressBar(false)
             } else {
                 showProgressBar(true)
-
             }
         }
     }
