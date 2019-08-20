@@ -4,12 +4,15 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.namlu.finerecipes.models.Recipe
 
-
 class RecipeResponse {
 
     @SerializedName("recipe")
     @Expose
-    val recipe: Recipe? = null
+    private val recipe: Recipe? = null
+
+    fun getRecipe(): Recipe? {
+        return recipe
+    }
 
     override fun toString(): String {
         return "RecipeResponse{" +
