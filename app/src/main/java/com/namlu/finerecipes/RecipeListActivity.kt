@@ -1,5 +1,8 @@
 package com.namlu.finerecipes
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,12 +12,15 @@ import com.namlu.finerecipes.models.Recipe
 import com.namlu.finerecipes.requests.ServiceGenerator
 import com.namlu.finerecipes.requests.responses.RecipeResponse
 import com.namlu.finerecipes.requests.responses.RecipeSearchResponse
+import com.namlu.finerecipes.viewmodels.RecipeListViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
 class RecipeListActivity : BaseActivity() {
+
+    private lateinit var recipeListViewModel: RecipeListViewModel
 
     companion object {
         const val TAG = "RecipeListActivity"
@@ -24,11 +30,22 @@ class RecipeListActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_list)
 
+        recipeListViewModel = ViewModelProviders.of(this).get(RecipeListViewModel::class.java)
+
         // Test BaseActivity
         val buttonTest = findViewById<Button>(R.id.btn_test)
         buttonTest.setOnClickListener {
             testRetrofitRequest()
         }
+    }
+
+    private fun subscribeObservers() {
+        recipeListViewModel.getRecipes().observe(this, object: Observer<List<Recipe>>() {
+            override fun onChanged(recipes: List<Recipe>?) {
+
+            }
+
+        })
     }
 
     private fun testRetrofitRequest() {
