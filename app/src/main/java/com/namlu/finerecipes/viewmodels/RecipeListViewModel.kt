@@ -1,17 +1,14 @@
 package com.namlu.finerecipes.viewmodels
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.namlu.finerecipes.models.Recipe
-
+import com.namlu.finerecipes.repositories.RecipeRepository
 
 class RecipeListViewModel : ViewModel() {
-
-    private val recipes = MutableLiveData<List<Recipe>>()
+    private val recipeRepository: RecipeRepository = RecipeRepository.getInstance()
 
     fun getRecipes(): LiveData<List<Recipe>> {
-        return recipes
+        return recipeRepository.getRecipes()
     }
-
 }
