@@ -32,15 +32,11 @@ class RecipeListActivity : BaseActivity() {
 
         recipeListViewModel = ViewModelProviders.of(this).get(RecipeListViewModel::class.java)
 
-        // Test BaseActivity
-        val buttonTest = findViewById<Button>(R.id.btn_test)
-        buttonTest.setOnClickListener {
-            testRetrofitRequest()
-        }
+        subscribeObservers()
     }
 
     private fun subscribeObservers() {
-        recipeListViewModel.getRecipes().observe(this, object: Observer<List<Recipe>>() {
+        recipeListViewModel.getRecipes().observe(this, object : Observer<List<Recipe>> {
             override fun onChanged(recipes: List<Recipe>?) {
 
             }
