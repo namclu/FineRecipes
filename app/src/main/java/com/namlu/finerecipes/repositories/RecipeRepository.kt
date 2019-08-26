@@ -1,8 +1,8 @@
 package com.namlu.finerecipes.repositories
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import com.namlu.finerecipes.models.Recipe
+import com.namlu.finerecipes.requests.RecipeApiClient
 
 /*
 * The Repository mediates data between the ViewModel and data sources
@@ -10,10 +10,10 @@ import com.namlu.finerecipes.models.Recipe
 * It will be used by the ViewModel to get its data.
 * */
 class RecipeRepository private constructor() {
-    private val recipes: MutableLiveData<List<Recipe>>
+    private val recipeApiClient: RecipeApiClient
 
     init {
-        recipes = MutableLiveData()
+        recipeApiClient = RecipeApiClient.getInstance()
     }
 
     companion object {
@@ -28,6 +28,6 @@ class RecipeRepository private constructor() {
     }
 
     fun getRecipes(): LiveData<List<Recipe>> {
-        return recipes
+        return recipeApiClient.getRecipes()
     }
 }
